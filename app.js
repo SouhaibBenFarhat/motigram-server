@@ -38,7 +38,9 @@ app.all('/*', function (req, res, next) {
 
 //Routing middleware
 const publicApi = require('./api/api.v1.public.js');
+const secureApi = require('./api/api.v1.secure.js');
 app.use('/api', publicApi);
+app.use('/api/v1', secureApi);
 
 
 
