@@ -28,7 +28,7 @@ const Comment = module.exports = mongoose.model('Comment', commentSchema);
 
 module.exports.findCommentByPostId = (postId) => {
     return new Promise((resolve, reject) => {
-        Comment.find({ postId: postId }).sort({ createdAt: 'asc' }).then((data) => {
+        Comment.find({ postId: postId }).sort({ createdAt: 'desc' }).then((data) => {
             resolve(data);
         }).catch((err) => {
             reject(err);
@@ -52,6 +52,16 @@ module.exports.addComment = (comment) => {
             resolve(data);
         }).catch((err) => {
             console.log(err);
+            reject(err);
+        })
+    })
+}
+
+module.exports.findCommentsByUserId = (userId) => {
+    return new Promise((resolve, reject) => {
+        Comment.find({ userId: userId }).sort({ createdAt: 'asc' }).then((data) => {
+            resolve(data);
+        }).catch((err) => {
             reject(err);
         })
     })

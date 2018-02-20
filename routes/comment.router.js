@@ -15,16 +15,27 @@ router.get('/:postId', (req, res) => {
 
 });
 
-router.get('/latest/:postId', (req, res) => {
-    
-        let postId = req.params.postId;
-        commentModule.findLatestComments(postId).then((data) => {
-            response.accepted(res, data);
-        }).catch((err) => {
-            response.badRequest(res, err);
-        });
-    
+router.get('/user/:userId', (req, res) => {
+
+    let userId = req.params.userId;
+    commentModule.findCommentsByUserId(userId).then((data) => {
+        response.accepted(res, data);
+    }).catch((err) => {
+        response.badRequest(res, err);
     });
+
+});
+
+router.get('/latest/:postId', (req, res) => {
+
+    let postId = req.params.postId;
+    commentModule.findLatestComments(postId).then((data) => {
+        response.accepted(res, data);
+    }).catch((err) => {
+        response.badRequest(res, err);
+    });
+
+});
 
 router.post('/', (req, res) => {
 

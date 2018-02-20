@@ -54,6 +54,26 @@ router.get('/latest', (req, res) => {
 
 });
 
+router.get('/:username', (req, res) => {
+    postModule.findPostByUsername(req.params.username).then((data) => {
+        response.accepted(res, data);
+    }).catch((err) => {
+        response.badRequest(res, err);
+    })
+})
+
+router.get('/user/:postId', (req, res) => {
+
+    postModule.findWhoCommented(req.params.postId).then((data) => {
+        response.accepted(res, data);
+    }).catch((err) => {
+        console.log(err);
+        response.badRequest(res, err);
+    })
+
+});
+
+
 
 
 

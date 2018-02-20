@@ -32,3 +32,13 @@ module.exports.findLatestComments = (postId) => {
         })
     })
 }
+
+module.exports.findCommentsByUserId = (userId) => {
+    return new Promise((resolve, reject) => {
+        Comment.findCommentsByUserId(userId).then((data) => {
+            resolve(data);
+        }).catch((err) => {
+            reject(err);
+        })
+    })
+}

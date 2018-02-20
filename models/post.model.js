@@ -68,6 +68,16 @@ module.exports.findPostById = (id) => {
     })
 }
 
+module.exports.findPostByUsername = (username) => {
+    return new Promise((resolve, reject) => {
+        Post.find({ 'owner.username': username }).sort({ createdAt: 'asc' }).then((data) => {
+            resolve(data);
+        }).catch((err) => {
+            reject(err);
+        })
+    })
+}
+
 module.exports.addPost = (post) => {
     return new Promise((resolve, reject) => {
         Post.create(post).then((data) => {

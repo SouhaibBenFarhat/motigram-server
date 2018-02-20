@@ -47,6 +47,7 @@ router.get('/info', (req, res) => {
     }
     let token = arr[1];
     getInfoFromToken(token).then((data) => {
+        data.token = token;
         response.accepted(res, helpers.removeExtraFieldsFromUserOnLogin(data));
     }).catch((err) => {
         response.badRequest(res, err);
