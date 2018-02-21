@@ -26,6 +26,18 @@ router.get('/', (req, res) => {
     }
 });
 
+router.get('/popular', (req, res) => {
+
+
+    postModule.findMostPopularPost().then((data) => {
+        response.accepted(res, data);
+    }).catch((err) => {
+        console.log(err);
+        response.badRequest(res, err);
+    })
+
+});
+
 router.post('/', (req, res) => {
     if (req.body == null || req.body == undefined) {
         response.badRequest(res, 'Empty request');
@@ -41,6 +53,39 @@ router.post('/', (req, res) => {
 
 
 })
+
+router.post('/like', (req, res) => {
+    if (req.body == null || req.body == undefined) {
+        response.badRequest(res, 'Empty request');
+        return;
+    }
+    postModule.like(req.body).then((data) => {
+        response.accepted(res, data);
+    }).catch((err) => {
+        console.log(err);
+        response.badRequest(res, err);
+    });
+
+
+});
+
+router.post('/dislike', (req, res) => {
+    if (req.body == null || req.body == undefined) {
+        response.badRequest(res, 'Empty request');
+        return;
+    }
+    postModule.dislike(req.body).then((data) => {
+        response.accepted(res, data);
+    }).catch((err) => {
+        console.log(err);
+        response.badRequest(res, err);
+    });
+
+
+});
+
+
+
 
 router.get('/latest', (req, res) => {
 

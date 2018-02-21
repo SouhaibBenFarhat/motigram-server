@@ -26,9 +26,8 @@ const postSchema = new mongoose.Schema({
         type: Number,
         default: 0
     },
-    interactions: {
-        type: [{ userId: String, type: String }]
-    },
+    interactions: []
+    ,
     createdAt: {
         type: Number,
         default: Date.now
@@ -45,6 +44,13 @@ module.exports.findAllPosts = () => {
         }).catch((err) => {
             reject(err);
         });
+    });
+}
+module.exports.findMostPopularPost = () => {
+    return new Promise((resolve, reject) => {
+        Post.find({}).sort({ interactions: 'desc' }).limit(3).then((data) => {
+            resolve(data);
+        }).catch(err => reject(err))
     });
 }
 
@@ -99,3 +105,4 @@ module.exports.updatePost = (post) => {
         });
     });
 }
+
