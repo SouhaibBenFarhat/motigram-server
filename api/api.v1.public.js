@@ -6,9 +6,7 @@ const authRouter = require('../routes/auth.router.js');
 
 
 // File Upload Router
-router.use("/uploads", express.static('uploads'));
-
-
+router.use("/upload", express.static('uploads'));
 router.use('/auth', authRouter);
 
 module.exports = router;

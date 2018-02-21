@@ -40,7 +40,7 @@ const Post = module.exports = mongoose.model('Post', postSchema);
 
 module.exports.findAllPosts = () => {
     return new Promise((resolve, reject) => {
-        Post.find({}).sort({ createdAt: 'asc' }).then((data) => {
+        Post.find({}).sort({ createdAt: 'desc' }).then((data) => {
             resolve(data);
         }).catch((err) => {
             reject(err);
@@ -50,7 +50,7 @@ module.exports.findAllPosts = () => {
 
 module.exports.findLatestPosts = () => {
     return new Promise((resolve, reject) => {
-        Post.find({}).sort({ createdAt: 'asc' }).limit(3).then((data) => {
+        Post.find({}).sort({ createdAt: 'desc' }).limit(3).then((data) => {
             resolve(data);
         }).catch((err) => {
             reject(err);
@@ -70,7 +70,7 @@ module.exports.findPostById = (id) => {
 
 module.exports.findPostByUsername = (username) => {
     return new Promise((resolve, reject) => {
-        Post.find({ 'owner.username': username }).sort({ createdAt: 'asc' }).then((data) => {
+        Post.find({ 'owner.username': username }).sort({ createdAt: 'desc' }).then((data) => {
             resolve(data);
         }).catch((err) => {
             reject(err);
